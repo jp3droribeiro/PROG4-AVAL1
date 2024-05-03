@@ -1,14 +1,18 @@
 Map<String, String> wordsTips = {
   "Apple": "Fruit",
   "Banana": "Fruit",
-  "Orange": "Color",
   "Grape": "Fruit",
   "Strawberry": "Fruit",
   "Watermelon": "Fruit",
-  "Mango": "Fruit",
   "Pineapple": "Fruit",
   "Blueberry": "Fruit",
   "Kiwi": "Fruit",
+  "Orange": "Color",
+  "Black": "Color",
+  "yellow": "Color",
+  "Dog": "Animal",
+  "Lion": "Animal",
+  "Monkey": "Animal",
 };
 
 String randomWord() {

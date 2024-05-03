@@ -6,13 +6,14 @@ import './widgets/gallows_image.dart';
 import './utils/words.dart';
 import './utils/alpha.dart';
 
+// _________
 class MainPageState extends State<MainPage> {
   String wordAndTips = randomWord();
-  
-  
+  String result = '';
+
   @override
   Widget build(BuildContext context) {
-    String word = wordAndTips.split(".")[0];
+    String word = wordAndTips.split(".")[0].toUpperCase();
     String tip = wordAndTips.split(".")[1];
 
     return Scaffold(
@@ -27,7 +28,7 @@ class MainPageState extends State<MainPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child:Stack(
+            child: Stack(
               children: [
                 gallowsImage(Game.tries >= 0,"assets/images/gallow.png"),
                 gallowsImage(Game.tries >= 1,"assets/images/head.png"),
@@ -37,7 +38,6 @@ class MainPageState extends State<MainPage> {
                 gallowsImage(Game.tries >= 5,"assets/images/left_leg.png"),
                 gallowsImage(Game.tries >= 6,"assets/images/right_leg.png"),
               ],
-
             ),
           ),
           Row(
@@ -45,22 +45,34 @@ class MainPageState extends State<MainPage> {
             children: word
                 .split("")
                 .map((e) => letter(e.toUpperCase(),
-                    Game.selectedKey.contains(e.toUpperCase())))
+                Game.selectedKey.contains(e.toUpperCase())))
                 .toList(),
           ),
+
           SizedBox(
-            child: Text(tip),
+            child: Text(tip,style: const TextStyle(color:Colors.white)),
           ),
 
-
-          // SizedBox(
-          //   child: Text(),
-            
-          // ),
+          SizedBox(
+            child: Text(result,style: const TextStyle(color:Colors.white, )), 
+          ),
+          // reoad Button
+          if (Game.tries >= 6)
+            FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  Game.reset();
+                  wordAndTips = randomWord();
+                  result = '';
+                });
+              },
+              child: Icon(Icons.refresh),
+              backgroundColor: Color.fromARGB(173, 244, 74, 17),
+            ),
+          
           SizedBox(
             width: double.infinity,
             height: 250.0,
-            
             child: GridView.count(
               crossAxisCount: 6,
               mainAxisSpacing: 0.0,
@@ -70,15 +82,19 @@ class MainPageState extends State<MainPage> {
                 return RawMaterialButton(
                   onPressed: Game.selectedKey.contains(e)
                       ? null
-                      : () { //se estiver contido na palavra chama a funcao:
-                          setState(() {
-                            Game.selectedKey.add(e);
-                            if (!word.split("").contains(e.toUpperCase())) {
-                              Game.tries++;
-                              Image.asset("assets/images/${Game.tries}.png");
-                            }
-                          });
-                        },
+                      : () {
+                    setState(() {
+                      Game.selectedKey.add(e);
+                      if (!word.split("").contains(e.toUpperCase())) {
+                        Game.tries++;
+                      }
+                      if (Game.tries >= 6 ||
+                          word.split("").every((letter) =>
+                          Game.selectedKey.contains(letter))) {
+                        result = Game.tries >= 6 ? "You Lose" : "You Win"; 
+                      }
+                    });
+                  },
                   fillColor: Game.selectedKey.contains(e)
                       ? Colors.black87
                       : Colors.transparent,
@@ -94,13 +110,16 @@ class MainPageState extends State<MainPage> {
               }).toList(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             child:
-              Text(" Matheus,Joao Pedro"),
+            Text("Matheus , João Pedro",style:TextStyle(color:Colors.white)),
           ),
+          
         ],
       ),
     );
   }
 }
+
+
 

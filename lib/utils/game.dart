@@ -3,5 +3,9 @@ class Game {
   static List<String> selectedKey = [];
   late String result ;
 
-  
+  static void reset() {
+    selectedKey.clear();
+    tries = 0;
+  }
+
 }

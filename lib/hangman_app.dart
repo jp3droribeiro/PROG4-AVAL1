@@ -7,7 +7,7 @@ class HangmanApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false, // tira a etiqueta de debug
+      debugShowCheckedModeBanner: false, 
       home: MainPage(),
     );
   }
