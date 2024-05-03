@@ -1,7 +1,9 @@
-# hangman
+# hangman Game 
+(jogo da forca)
+
+Dupla : Matheus Silva e João Pedro Dutra.
 
 A new Flutter project.
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.
