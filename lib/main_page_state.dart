@@ -91,7 +91,7 @@ class MainPageState extends State<MainPage> {
                       if (Game.tries >= 6 ||
                           word.split("").every((letter) =>
                           Game.selectedKey.contains(letter))) {
-                        result = Game.tries >= 6 ? "You Lose" : "You Win"; 
+                        result = Game.tries >= 6 ? "Loser" : "Winner"; 
                       }
                     });
                   },
